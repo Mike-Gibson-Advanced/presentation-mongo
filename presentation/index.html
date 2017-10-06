@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>MongoDB</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/black.css" id="theme">
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+</head>
+
+<body>
+    <style>
+        .reveal .sub-header {
+            font-weight: normal;
+            color: #909090;
+        }
+
+        .reveal .sub-header-separator {
+            color: white;
+            padding: 0 20px;
+            font-size: 1.2em;
+            font-weight: normal
+        }
+
+        .xml .javascript,
+        .javascript .xml,
+        .xml .css,
+        .css .xml {
+            opacity: 1;
+        }
+
+        .reveal pre {
+            font-size: 1em;
+        }
+
+        .reveal h1 {
+            margin-bottom: 60px;
+        }
+
+        .reveal h2 {
+            margin-bottom: 8%;
+        }
+/* 
+        .reveal ol>li {
+            margin-bottom: 20px;
+        } */
+
+        .reveal ol ul li {
+            font-size: 0.8em;
+        }
+
+        .fragment.hide-after.visible:not(.current-fragment) {
+            display: none;
+            height: 0px;
+            line-height: 0px;
+            font-size: 0px;
+        }
+
+        .reveal .slides section .fragment.slide-up {
+            opacity: 0;
+            visibility: visible;
+            transition: transform 1s ease-out, opacity 0.2s ease;
+            transform: translate(1000px, 0);
+        }
+
+        .reveal .slides section .fragment.slide-up.visible {
+            opacity: 1;
+            transform: none;
+        }
+/* 
+        ol.diagram>li {
+            display: inline-block;
+            text-align: center
+        }
+
+        ol.diagram>li>img {
+            border: 0;
+            background: none;
+            box-shadow: none;
+            max-width: 100px;
+        }
+
+        ol.diagram>li.arrow {
+            display: inline-block;
+            text-align: center;
+            vertical-align: 160%;
+            margin: 0 -20px;
+        }
+
+        ol.diagram>li.arrow>img {
+            max-width: 40px;
+        } */
+
+        .reveal .slides section img.plain {
+            border: 0;
+            background: none;
+            box-shadow: none;
+            transition: all 0s;
+        }
+
+        ul.spaced > li,
+        ol.spaced > li {
+            margin-bottom: 5%;
+        }
+
+        .reveal pre.inline {
+            display: inline;
+        }
+    </style>
+
+    <div class="reveal">
+
+        <!-- Any section element inside of this container is displayed as a slide -->
+        <div class="slides">
+            <section>
+                <h1 style="text-transform: none">MongoDB</h1>
+            </section>
+
+            <section>
+                <h2>
+                    What I will cover
+                </h2>
+
+                <ol class="spaced">
+                    <li>Brief intro to document databases</li>
+                    <li>Mongo overview</li>
+                    <li>Connecting to Mongo and available tools</li>
+                    <li>CRUD operations</li>
+                    <!-- <li>Indexes?</li>
+                    <li>Design patterns?</li> -->
+                </ol>
+
+            </section>
+
+            <section>
+                <h2>
+                    Document databases
+                </h2>
+
+                <ul class="spaced">
+                    <li class="fragment">Relational databases introduced in 1970s</li>
+                    <li>
+                        <p class="fragment">
+                            Document databases store semi-structured data
+                        </p>
+                        <pre class="javascript fragment hide-after">
+                        <code>
+{ 
+    "title": "First blog post",
+    "tags": [ "new", "awesome" ]
+}
+                        </code>
+                        </pre>
+                    </li>
+                    <li class="fragment">Most Document (and other NoSQL) databases focus on speed and scalability</li>
+                    <li class="fragment">Document databases are an alternative, not a replacement</li>
+                </ul>
+
+                <!--
+                    https://www.mongodb.com/document-databases
+                    https://msdn.microsoft.com/en-gb/magazine/hh547103.aspx 
+                -->
+            </section>
+
+            <section>
+                
+                <section>
+                    <h2>
+                        Mongo overview
+                    </h2>
+
+                    <p class="fragment">Mongo stores documents</p>
+
+                    <pre class="fragment">
+Mongo document represented in JSON:
+                        <code class="hljs" data-trim contenteditable>
+{ 
+    "title": "First blog post",
+    "author": {
+        "id": 98,
+        "name": "Joe Bloggs"
+    },
+    "tags": [ "new", "awesome" ]
+}
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>
+                        Mongo overview
+                        <br>
+                        <small>BSON</small>
+                    </h2>
+
+                    <p class="fragment">Mongo stores data as Binary JSON (BSON)</p>
+
+                    <ul class="spaced">
+                        <li class="fragment">
+                            BSON was designed to be lightweight, traversable and efficient
+                        </li>
+                        <li class="fragment">
+                            BSON provides support for all JSON data types and several others
+                        </li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>
+                        Mongo overview
+                        <br>
+                        <small>BSON</small>
+                    </h2>
+
+                    <ul class="fragment" style="float: left; width: 50%; ">
+                        <li>Double</li>
+                        <li>String</li>
+                        <li>Object</li>
+                        <li>Array</li>
+                        <li>Binary data</li>
+                        <li>ObjectId</li>
+                        <li>Boolean</li>
+                        <li>Date</li>
+                        <li>Null</li>
+                    </ul>
+
+                    <ul class="fragment" style="float: left; ">
+                        <li>Regular Expression</li>
+                        <li>JavaScript</li>
+                        <li>JavaScript (w/ scope)</li>
+                        <li>32-bit integer</li>
+                        <li>Timestamp</li>
+                        <li>64-bit integer</li>
+                        <li>Decimal128</li>
+                        <li>Min key</li>
+                        <li>Max key</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>
+                        Mongo overview
+                    </h2>
+
+                    <ul>
+                        <li class="fragment">Mongo contains <em>documents</em>, <em>collections</em> and <em>databases</em></li>
+                        <li class="fragment">Analagous to rows, tables and databases in relational database</li>
+                    </ul>
+
+                    <div class="fragment">
+                        <p>
+                            <pre>
+database "blog"
+collections "posts", "authors", "comments"
+                            </pre>
+                        </p>
+                    </div>
+
+                </section>
+
+                <section>
+                    <h2>
+                        Mongo overview
+                        <br>
+                        <small style="text-transform: none">_id</small>
+                    </h2>
+
+                    <ul class="spaced">
+                        <li class="fragment">All documents must have an <pre class="inline">_id</pre> field</li>
+                        <li class="fragment"><pre class="inline">_id</pre> field is immutable</li>
+                        <li class="fragment">If no <pre class="inline">_id</pre> is specified when a document is inserted, MongoDB will add the <pre class="inline">_id</pre> field</li>
+                        <li class="fragment">The <pre class="inline">_id</pre> field is unique to a collection</li>
+                    </ul>
+
+                </section>
+
+                <section>
+                    <h2>
+                        Mongo overview
+                        <br>
+                        <small style="text-transform: none">Atomicity and Transactions</small>
+                    </h2>
+
+                    <ul class="spaced">
+                        <li class="fragment">All documents must have an <pre class="inline">_id</pre> field</li>
+                        <li class="fragment"><pre class="inline">_id</pre> field is immutable</li>
+                        <li class="fragment">If no <pre class="inline">_id</pre> is specified when a document is inserted, MongoDB will add the <pre class="inline">_id</pre> field</li>
+                        <li class="fragment">The <pre class="inline">_id</pre> field is unique to a collection</li>
+                    </ul>
+
+                </section>
+                
+            </section>
+
+            <section style="text-align: left;">
+                <h1>The End</h1>
+
+                <span>Any (straight forward) questions?</span>
+            </section>
+
+        </div>
+
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+
+    <script>
+            // Full list of configuration options available at:
+            // https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                controls: true,
+                progress: true,
+                history: true,
+                center: true,
+
+                transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+                parallaxBackgroundImage: 'custom/bg.jpg',
+
+                // Parallax background size
+                parallaxBackgroundSize: '3166px 1622px', // CSS syntax, e.g. "2100px 900px"
+
+                // Amount to move parallax background (horizontal and vertical) on slide change
+                // Number, e.g. 100
+                parallaxBackgroundHorizontal: '5',
+                parallaxBackgroundVertical: '4',
+
+                // Optional reveal.js plugins
+                dependencies: [
+                    { src: 'lib/js/classList.js', condition: function () { return !document.body.classList; } },
+                    { src: 'plugin/markdown/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+                    { src: 'plugin/markdown/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+                    { src: 'plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } },
+                    { src: 'plugin/zoom-js/zoom.js', async: true },
+                    { src: 'plugin/notes/notes.js', async: true }
+                ]
+            });
+    </script>
+
+</body>
+
+</html>
