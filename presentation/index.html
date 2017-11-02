@@ -158,14 +158,14 @@
                     What I will cover
                 </h2>
 
-                <ol class="spaced">
-                    <li>Brief intro to document databases</li>
-                    <li>Mongo overview</li>
-                    <li>Running and Connecting to Mongo (and tools)</li>
-                    <li>CRUD operations</li>
-                    <!-- <li>Indexes?</li>
-                    <li>Design patterns?</li> -->
-                </ol>
+                <div class="fragment">
+                    <ol class="spaced" >
+                        <li>Brief intro to document databases</li>
+                        <li>Mongo overview</li>
+                        <li>Running and Connecting to Mongo (and tools)</li>
+                        <li>CRUD operations</li>
+                    </ol>
+                </div>
 
             </section>
 
@@ -317,7 +317,7 @@ collections "posts", "authors", "comments"
                         <small style="text-transform: none">Atomicity and Transactions</small>
                     </h2>
 
-                    <ul class="spaced fragment">
+                    <ul class="spaced">
                         <li class="fragment">A write operation is atomic on the level of a <em>single</em> document</li>
                         <li class="fragment">When a single write operation modifies multiple documents, the operation as a whole is <em>NOT</em> atomic</li>
                     </ul>
@@ -493,7 +493,7 @@ db.numbers.deleteOne( { a: { $lt: 5 } } )
 db.numbers.deleteMany( { a: { $lt: 5 } } )
                     </code></pre>
 
-                    <pre class="fragment wide hide-after"><code class="hljs" data-trim contenteditable>
+                    <pre class="fragment wide "><code class="hljs" data-trim contenteditable>
 db.numbers.deleteMany( { } )
                     </code></pre>
 
@@ -678,7 +678,7 @@ db.movies.find( { }, { "title": 1 } )
                     <div class="fragment ">
                         <p style="text-align: left">Array query operators:</p>
                         <ul>
-                            <li>$all: Array fieldmust contain all values listed</li>
+                            <li>$all: Array field must contain all values listed</li>
                             <li>$size: Array must have a particular size</li>
                             <li>$elemMatch: All conditions must be matched by at least one element in the array</li>
                         </ul>
@@ -853,8 +853,9 @@ db.movies.findOneAndUpdate(
                 <h1>Potential Future Topics</h1>
 
                 <ul>
+                    <li>Read &amp; Write Concerns</li>
                     <li>Indexes</li>
-                    <li>Aggregation framework</li>
+                    <li>Aggregation Framework</li>
                     <li>Schema Design</li>
                     <li>Replica Sets</li>
                     <li>Sharding</li>
