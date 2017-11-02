@@ -146,7 +146,11 @@
         <!-- Any section element inside of this container is displayed as a slide -->
         <div class="slides">
             <section>
-                <h1 style="text-transform: none">MongoDB</h1>
+                <h1 style="text-transform: none">
+                    MongoDB
+                    <br />
+                    <small style="font-weight: normal">Introduction</small>
+                </h1>
             </section>
 
             <section>
@@ -157,7 +161,7 @@
                 <ol class="spaced">
                     <li>Brief intro to document databases</li>
                     <li>Mongo overview</li>
-                    <li>Connecting to Mongo and available tools</li>
+                    <li>Running and Connecting to Mongo (and tools)</li>
                     <li>CRUD operations</li>
                     <!-- <li>Indexes?</li>
                     <li>Design patterns?</li> -->
@@ -170,14 +174,15 @@
                     Document databases
                 </h2>
 
-                <ul class="spaced">
+                <ul class="">
                     <li class="fragment">Relational databases introduced in 1970s</li>
-                    <li>
-                        <p class="fragment">
+                    <li class="fragment">Gave rise to NoSQL (including document) databases</li>
+                    <li class="fragment">
+                        <span>
                             Document databases store semi-structured data
-                        </p>
-                        <pre class="javascript fragment hide-after">
-                        <code>
+                        </span>
+                        <pre class="fragment hide-after">
+                        <code class="hljs">
 { 
     "title": "First blog post",
     "tags": [ "new", "awesome" ]
@@ -185,7 +190,6 @@
                         </code>
                         </pre>
                     </li>
-                    <li class="fragment">Most Document (and other NoSQL) databases focus on speed and scalability</li>
                     <li class="fragment">Document databases are an alternative, not a replacement</li>
                 </ul>
 
@@ -361,271 +365,500 @@ update: {
             </section>
 
             <section>
-                    <section>
-                        <h2>
-                            CRUD
-                            <br>
-                            <small style="text-transform: none">Inserting</small>
-                        </h2>
-                        
-                        <pre class="fragment"><code class="hljs" data-trim contenteditable>
+                <section>
+                    <h2>
+                        Running and Connecting
+                        <br>
+                        <small style="text-transform: none">Running</small>
+                    </h2>
+
+                    <ol class="spaced">
+                        <li class="fragment"><a href="https://www.mongodb.com/download-center#community" target="_blank">Download</a></li>
+                        <li class="fragment">Make sure the folder <pre class="inline">C:\data\db\</pre> exists</li>
+                        <li class="fragment">Run <pre class="inline">mongod.exe</pre></li>
+                    </ol>
+                </section>
+
+                <section>
+                    <h2>
+                        Running and Connecting
+                        <br>
+                        <small style="text-transform: none">Connecting</small>
+                    </h2>
+
+                    <ul class="spaced">
+                        <li class="fragment">
+                            I'll use the Mongo Shell (<pre class="inline">mongo.exe</pre>)
+                        </li>
+                        <li class="fragment">
+                            Otherwise, each driver has documentation on how to configure the connection
+                        </li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>
+                        Running and Connecting
+                        <br>
+                        <small style="text-transform: none">Tools</small>
+                    </h2>
+
+                    <ul class="spaced">
+                        <li class="fragment">
+                            <a href="https://www.mongodb.com/download-center#compass" target="_blank">Compass</a>
+                             - Official GUI
+                        </li>
+                        <li class="fragment">
+                            <a href="https://robomongo.org/download" target="_blank">Robo 3T</a>
+                             - 3rd party GUI
+                        </li>
+                    </ul>
+                </section>
+            </section>
+
+            <section>
+                <section>
+                    <h2>
+                        CRUD
+                        <br>
+                        <small style="text-transform: none">Inserting</small>
+                    </h2>
+                    
+                    <pre class="fragment"><code class="hljs" data-trim contenteditable>
 db.movies.insertOne({
-    "title": "Jaws"
+"title": "Jaws"
 })
-                        </code></pre>
+                    </code></pre>
 
-                    </section>
-                    <section>
-                        <h2>
-                            CRUD
-                            <br>
-                            <small style="text-transform: none">Inserting</small>
-                        </h2>
-                        
-                        <ul class="spaced">
-                            <li class="fragment">We did not specify an <pre class="inline">_id</pre>, so one was auto-generated</li>
-                            <li class="fragment">
-                                If we specify an <pre class="inline">_id</pre> then:
-                                <ul>
-                                    <li class="fragment">It must be unique in the collection</li>
-                                    <li class="fragment">It can be any type except an Array</li>
-                                </ul>
-                            </li>
-                        </ul>
-        
-                    </section>
-                    <section>
-                        <h2>
-                            CRUD
-                            <br>
-                            <small style="text-transform: none">Inserting</small>
-                        </h2>
+                </section>
+                <section>
+                    <h2>
+                        CRUD
+                        <br>
+                        <small style="text-transform: none">Inserting</small>
+                    </h2>
+                    
+                    <ul class="spaced">
+                        <li class="fragment">We did not specify an <pre class="inline">_id</pre>, so one was auto-generated</li>
+                        <li class="fragment">
+                            If we specify an <pre class="inline">_id</pre> then:
+                            <ul>
+                                <li class="fragment">It must be unique in the collection</li>
+                                <li class="fragment">It can be any type except an Array</li>
+                            </ul>
+                        </li>
+                    </ul>
+    
+                </section>
+                <section>
+                    <h2>
+                        CRUD
+                        <br>
+                        <small style="text-transform: none">Inserting</small>
+                    </h2>
 
-                        <pre class="fragment wide"><code class="hljs" data-trim contenteditable>
+                    <pre class="fragment wide"><code class="hljs" data-trim contenteditable>
 db.movies.insertMany( [
-    { "_id": "Batman", "year": 1989 },
-    { "_id": "Home Alone", "year": 1990 },
-    { "_id": "Ghostbusters", "year": 1984 }
+{ "_id": "Batman", "year": 1989 },
+{ "_id": "Home Alone", "year": 1990 },
+{ "_id": "Ghostbusters", "year": 1984 }
 ] )
-                        </code></pre>
-        
-                    </section>
+                    </code></pre>
+    
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>
+                        CRUD
+                        <br>
+                        <small style="text-transform: none">Deleting</small>
+                    </h2>
 
-                    <section>
-                        <h2>
-                            CRUD
-                            <br>
-                            <small style="text-transform: none">Deleting</small>
-                        </h2>
-
-                        <pre class="fragment wide hide-after"><code class="hljs" data-trim contenteditable>
+                    <pre class="fragment wide hide-after"><code class="hljs" data-trim contenteditable>
 for (i=1; i<=20; i++) {
-    db.numbers.insertOne( { a: i } )
+db.numbers.insertOne( { a: i } )
 }
-                        </code></pre>
-                        
-                        <pre class="fragment wide hide-after"><code class="hljs" data-trim contenteditable>
+                    </code></pre>
+                    
+                    <pre class="fragment wide hide-after"><code class="hljs" data-trim contenteditable>
 db.numbers.deleteOne( { a: 1 } )
-                        </code></pre>
+                    </code></pre>
 
-                        <pre class="fragment wide hide-after"><code class="hljs" data-trim contenteditable>
+                    <pre class="fragment wide hide-after"><code class="hljs" data-trim contenteditable>
 db.numbers.deleteOne( { a: { $lt: 5 } } )
-                        </code></pre>
+                    </code></pre>
 
-                        <pre class="fragment wide hide-after"><code class="hljs" data-trim contenteditable>
+                    <pre class="fragment wide hide-after"><code class="hljs" data-trim contenteditable>
 db.numbers.deleteMany( { a: { $lt: 5 } } )
-                        </code></pre>
+                    </code></pre>
 
-                        <pre class="fragment wide hide-after"><code class="hljs" data-trim contenteditable>
+                    <pre class="fragment wide hide-after"><code class="hljs" data-trim contenteditable>
 db.numbers.deleteMany( { } )
-                        </code></pre>
+                    </code></pre>
 
-                    </section>
+                </section>
+            </section>
+            <section>
 
-                    <section>
-                        <h2>
-                            CRUD
-                            <br>
-                            <small style="text-transform: none">Querying</small>
-                        </h2>
+                <section>
+                    <h2>
+                        CRUD
+                        <br>
+                        <small style="text-transform: none">Querying</small>
+                    </h2>
 
-                        <ul class="spaced">
-                            <li class="fragment">To query MongoDB, specify a document containing the key / value pairs you want to match</li>
-                            <li class="fragment">You need only specify values for fields you care about</li>
-                        </ul>
+                    <ul class="spaced">
+                        <li class="fragment">To query MongoDB, specify a document containing the key / value pairs you want to match</li>
+                        <li class="fragment">You need only specify values for fields you care about</li>
+                    </ul>
 
-                    </section>
-                    <section>
-                        <h2>
-                            CRUD
-                            <br>
-                            <small style="text-transform: none">Querying</small>
-                        </h2>
+                </section>
+                <section>
+                    <h2>
+                        CRUD
+                        <br>
+                        <small style="text-transform: none">Querying</small>
+                    </h2>
 
-                        <pre class="fragment wide small-text"><code class="hljs" data-trim contenteditable>
+                    <pre class="fragment wide small-text"><code class="hljs" data-trim contenteditable>
 db.movies.drop()
 db.movies.insertMany( [
-    { "title": "Jaws",
-        "year": 1975, "imdb_rating": 8.1 },
-    { "title": "Batman",
-        "year": 1989, "imdb_rating": 7.6 }
+{ "title": "Jaws",
+    "year": 1975, "imdb_rating": 8.1 },
+{ "title": "Batman",
+    "year": 1989, "imdb_rating": 7.6 }
 ] )
 db.movies.find()
-                        </code></pre>
-                        
-                        <pre class="fragment wide hide-after"><code class="hljs" data-trim contenteditable>
+                    </code></pre>
+                    
+                    <pre class="fragment wide hide-after"><code class="hljs" data-trim contenteditable>
 db.movies.find( { "year": 1975 } )
-                        </code></pre>
+                    </code></pre>
 
-                        <pre class="fragment wide hide-after"><code class="hljs" data-trim contenteditable>
+                    <pre class="fragment wide hide-after"><code class="hljs" data-trim contenteditable>
 db.movies.find( { 
-    "year": 1989, "title": "Batman" } )
-                        </code></pre>
+"year": 1989, "title": "Batman" } )
+                    </code></pre>
 
-                    </section>
-                    <section>
-                        <h2>
-                            CRUD
-                            <br>
-                            <small style="text-transform: none">Querying</small>
-                        </h2>
+                </section>
+                <section>
+                    <h2>
+                        CRUD
+                        <br>
+                        <small style="text-transform: none">Querying</small>
+                    </h2>
 
-                        
-                        <p class="fragment hide-after">These were simple examples, it's also possible to query array fields and fields in embedded document</p>
+                    
+                    <p class="fragment hide-after">These were simple examples, it's also possible to query array fields and fields in embedded document</p>
 
-                        <pre class="fragment wide small-text"><code class="hljs" data-trim contenteditable>
+                    <pre class="fragment wide small-text"><code class="hljs" data-trim contenteditable>
 db.movies.insertMany( [ {
-    "title": "Avatar",
-    "box_office": { "gross": 760, "budget": 237 },
-    "genres": [ "action", "adventure", "sci-fi" ]
+"title": "Avatar",
+"box_office": { "gross": 760, "budget": 237 },
+"genres": [ "action", "adventure", "sci-fi" ]
 }, {
-    "title": "E.T.",
-    "box_office": { "gross": 349, "budget": 10.5 },
-    "genres": [ "family", "sci-fi" ]
+"title": "E.T.",
+"box_office": { "gross": 349, "budget": 10.5 },
+"genres": [ "family", "sci-fi" ]
 } ] )
-                        </code></pre>
+                    </code></pre>
 
-                        <pre class="fragment wide hide-after"><code class="hljs" data-trim contenteditable>
-db.movies.find( { "category": "action" } )
-                        </code></pre>
+                    <pre class="fragment wide hide-after"><code class="hljs" data-trim contenteditable>
+db.movies.find( { "genres": "action" } )
+                    </code></pre>
 
-                        <pre class="fragment wide hide-after"><code class="hljs" data-trim contenteditable>
+                    <pre class="fragment wide hide-after"><code class="hljs" data-trim contenteditable>
 // Won't match:
 db.movies.find( {
-    "category": [ "action", "sci-fi" ]
+"genres": [ "action", "sci-fi" ]
 } )
-                        </code></pre>
+                    </code></pre>
 
-                        <pre class="fragment wide hide-after"><code class="hljs" data-trim contenteditable>
+                    <pre class="fragment wide hide-after"><code class="hljs" data-trim contenteditable>
 db.movies.find( { 
-    "genre": { $all: [ "action", "sci-fi" ] }
+"genres": { $all: [ "action", "sci-fi" ] }
 } )
-                        </code></pre>
+                    </code></pre>
 
-                        <pre class="fragment wide hide-after"><code class="hljs" data-trim contenteditable>
+                    <pre class="fragment wide hide-after"><code class="hljs" data-trim contenteditable>
 db.movies.find( { "box_office.gross": 760 } )
-                        </code></pre>
+                    </code></pre>
 
-                        <pre class="fragment wide hide-after"><code class="hljs" data-trim contenteditable>
+                    <pre class="fragment wide hide-after"><code class="hljs" data-trim contenteditable>
 // Won't match:
 db.movies.find( {
-    "box_office": { "gross": 760 }
+"box_office": { "gross": 760 }
 } )
-                        </code></pre>
+                    </code></pre>
 
-                    </section>
-                    <section>
-                        <h2>
-                            CRUD
-                            <br>
-                            <small style="text-transform: none">Querying - Projections</small>
-                        </h2>
+                </section>
+                <section>
+                    <h2>
+                        CRUD
+                        <br>
+                        <small style="text-transform: none">Querying - Projections</small>
+                    </h2>
 
-                        <pre class="fragment wide small-text"><code class="hljs" data-trim contenteditable>
+                    <pre class="fragment wide small-text"><code class="hljs" data-trim contenteditable>
 db.movies.insertMany( [ {
-    "title": "Avatar",
-    "box_office": { "gross": 760, "budget": 237 },
-    "genres": [ "action", "adventure", "sci-fi" ]
+"title": "Avatar",
+"box_office": { "gross": 760, "budget": 237 },
+"genres": [ "action", "adventure", "sci-fi" ]
 }, {
-    "title": "E.T.",
-    "box_office": { "gross": 349, "budget": 10.5 },
-    "genres": [ "family", "sci-fi" ]
+"title": "E.T.",
+"box_office": { "gross": 349, "budget": 10.5 },
+"genres": [ "family", "sci-fi" ]
 } ] )
-                        </code></pre>
-                        
-                        <pre class="fragment wide hide-after"><code class="hljs" data-trim contenteditable>
+                    </code></pre>
+                    
+                    <pre class="fragment wide hide-after"><code class="hljs" data-trim contenteditable>
 db.movies.find( { }, { "title": 1 } )
+                    </code></pre>
+
+                </section>
+                <section>
+                    <h2>
+                        CRUD
+                        <br>
+                        <small style="text-transform: none">Querying - Projections</small>
+                    </h2>
+
+                    <ul class="spaced">
+                        <li class="fragment">
+                            Include fields with <pre class="inline">fieldName: 1</pre>
+                            <ul>
+                                <li class="fragment">Any field not named will be excluded...</li>
+                                <li class="fragment">except <pre class="inline">_id</pre>, which must be explicitly excluded</li>
+                            </ul>
+                        </li>
+                        <li class="fragment">
+                            Exclude fields with <pre class="inline">fieldName: 0</pre>
+                            <ul>
+                                <li class="fragment">Any field not named will be included</li>
+                            </ul>
+                        </li>
+                        <li class="fragment">Can't mix inclusion/exclusion (except <pre class="inline">_id</pre>)</li>
+                    </ul>
+
+                </section>
+                <section>
+                    <h2>
+                        CRUD
+                        <br>
+                        <small style="text-transform: none">Querying - Operators</small>
+                    </h2>
+                    <div class="fragment hide-after">
+                        <p style="text-align: left">Comparison operators:</p>
+                        <ul>
+                            <li>$lt: Exists and is less than</li>
+                            <li>$lte: Exists and is less than or equal to</li>
+                            <li>$gt: Exists and is greater than</li>
+                            <li>$gte: Exists and is greater than or equal to</li>
+                            <li>$ne: Does not exist or does but is not equal to</li>
+                            <li>$in: Exists and is in a set</li>
+                            <li>$nin: Does not exist or is not in a set</li>
+                        </ul>
+                    </div>
+
+                    <div class="fragment hide-after">
+                        <p style="text-align: left">Logical operators:</p>
+                        <ul>
+                            <li>$or: Match either of two or more values</li>
+                            <li>$not: Used with other operators</li>
+                            <li>$nor: Match neither of two or more values</li>
+                            <li>
+                                $and: Match both of two or more values
+                                <br>
+                                <small>(default behaviour when specifying more than one condition)</small>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="fragment ">
+                        <p style="text-align: left">Array query operators:</p>
+                        <ul>
+                            <li>$all: Array fieldmust contain all values listed</li>
+                            <li>$size: Array must have a particular size</li>
+                            <li>$elemMatch: All conditions must be matched by at least one element in the array</li>
+                        </ul>
+                    </div>
+
+                </section>
+            </section>
+            <section>
+                    <section>
+                        <h2>
+                            CRUD
+                            <br>
+                            <small style="text-transform: none">Updating</small>
+                        </h2>
+    
+                        <pre class="fragment"><code class="hljs" data-trim contenteditable>
+db.movies.updateOne(
+  { queryDocument },
+  { changeDocument }
+)
                         </code></pre>
 
+                        <div class="fragment"><pre class="inline">updateMany</pre> also exists</div>
                     </section>
+
                     <section>
                         <h2>
                             CRUD
                             <br>
-                            <small style="text-transform: none">Querying - Projections</small>
+                            <small style="text-transform: none">Updating</small>
                         </h2>
 
-                        <ul class="spaced">
-                            <li class="fragment">
-                                Include fields with <pre class="inline">fieldName: 1</pre>
-                                <ul>
-                                    <li class="fragment">Any field not named will be excluded...</li>
-                                    <li class="fragment">except <pre class="inline">_id</pre>, which must be explicitly excluded</li>
-                                </ul>
-                            </li>
-                            <li class="fragment">
-                                Exclude fields with <pre class="inline">fieldName: 0</pre>
-                                <ul>
-                                    <li class="fragment">Any field not named will be included</li>
-                                </ul>
-                            </li>
-                            <li class="fragment">Can't mix inclusion/exclusion (except <pre class="inline">_id</pre>)</li>
-                        </ul>
-
-                    </section>
-                    <section>
-                        <h2>
-                            CRUD
-                            <br>
-                            <small style="text-transform: none">Querying - Operators</small>
-                        </h2>
                         <div class="fragment hide-after">
-                            <p style="text-align: left">Comparison operators:</p>
+                            <p style="text-align: left">Update operators:</p>
                             <ul>
-                                <li>$lt: Exists and is less than</li>
-                                <li>$lte: Exists and is less than or equal to</li>
-                                <li>$gt: Exists and is greater than</li>
-                                <li>$gte: Exists and is greater than or equal to</li>
-                                <li>$ne: Does not exist or does but is not equal to</li>
-                                <li>$in: Exists and is in a set</li>
-                                <li>$nin: Does not exist or is not in a set</li>
-                            </ul>
-                        </div>
-
-                        <div class="fragment hide-after">
-                            <p style="text-align: left">Logical operators:</p>
-                            <ul>
-                                <li>$or: Match either of two or more values</li>
-                                <li>$not: Used with other operators</li>
-                                <li>$nor: Match neither of two or more values</li>
-                                <li>
-                                    $and: Match both of two or more values
-                                    <br>
-                                    <small>(default behaviour when specifying more than one condition)</small>
-                                </li>
+                                <li>$set: Change field's value (if exists already) or add new field with that value (if does not exist)</li>
+                                <li>$unset: Remove field if it exists</li>
+                                <li>$inc: Increment a field's value by the specified amount</li>
+                                <li>$mul: Multiply a field's value by the specified amount</li>
+                                <li>$currentDate: Set the value of a field to the current date or timestamp</li>
                             </ul>
                         </div>
     
-                        TODO: UPDATE! (p34)
+                        <pre class="fragment hide-after"><code class="hljs" data-trim contenteditable>
+db.movies.updateOne(
+    { "title": "Avatar" },
+    { $set: { "imdb_rating": 7.8 } }
+)
+                        </code></pre>
 
+                        <pre class="fragment "><code class="hljs" data-trim contenteditable>
+db.movies.updateOne(
+    { "title": "Avatar" },
+    { $inc: { "imdb_rating": 2 } }
+)
+                        </code></pre>
                     </section>
 
+                    <section>
+                        <h2>
+                            CRUD
+                            <br>
+                            <small style="text-transform: none">Updating - Arrays</small>
+                        </h2>
+    
+                        <pre class="fragment wide hide-after"><code class="hljs" data-trim contenteditable>
+db.movies.updateOne(
+  { "title": "Avatar" },
+  { $set: { "genres.2": "science-fiction" } }
+)
+                        </code></pre>
+
+                        <div class="fragment hide-after">
+                            <p style="text-align: left">Array update operators:</p>
+                            <ul>
+                                <li>$push: Appends an element to the end of the array</li>
+                                <li>$pushAll: Appends multiple elements to the end of the array</li>
+                                <li>$pop: Removes one element from the end of the array</li>
+                                <li>$pull: Removes all elements in the array that match a specified value</li>
+                                <li>$pullAll: Removes all elements in the array that match any of the specified values</li>
+                                <li>$addToSet: Appends an element to the array if not already present</li>
+                            </ul>
+                        </div>
+                        
+                        <pre class="fragment wide"><code class="hljs" data-trim contenteditable>
+db.movies.updateOne(
+  { "title": "Avatar" },
+  { $addToSet: { "genres": "animated" } }
+)
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>
+                            CRUD
+                            <br>
+                            <small style="text-transform: none">Updating - Upsert</small>
+                        </h2>
+    
+                        <div class="fragment hide-after">
+                            <p style="text-align: left">Upsert mechanics:</p>
+                            <ul>
+                                <li class="">Will update if documents matching the query exist</li>
+                                <li class="">
+                                    Will insert if no documents match
+                                    <ul>
+                                        <li>Creates a new document using equality conditions in the query document</li>
+                                        <li>Adds an _id if the query did not specify one</li>
+                                        <li>Performs the write on the new document</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <pre class="fragment"><code class="hljs" data-trim contenteditable>
+db.movies.updateOne(
+    { "title": "Jaws" },
+    { $set: { "imdb_rating": 7.1 } },
+    { upsert: true }
+)
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>
+                            CRUD
+                            <br>
+                            <small style="text-transform: none">Updating - findOneAndUpdate</small>
+                        </h2>
+    
+                        <ul class="spaced">
+                            <li class="fragment">
+                                Update one document and return it
+                            </li>
+                            <li class="fragment">
+                                By default, the returned document represents the data before the update, but it can be configured to return the resultant document from the update
+                            </li>
+                            <li class="fragment">
+                                Read and write pair is atomic
+                            </li>
+                            <li class="fragment">
+                                Can be used with upsert
+                            </li>
+                        </ul>
+                        
+                    </section>
+                    <section>
+                        <h2>
+                            CRUD
+                            <br>
+                            <small style="text-transform: none">Updating - findOneAndUpdate</small>
+                        </h2>
+    
+                        <pre class="wide"><code class="hljs" data-trim contenteditable>
+db.movies.findOneAndUpdate(
+    { "title": "Jaws" },
+    { 
+        $addToSet: { "genre": "action" },
+        $set: { "imdb_rating": 10 } 
+    },
+    { returnNewDocument: true }
+)
+                        </code></pre>
+                    </section>
             </section>
 
             <section style="text-align: left;">
                 <h1>The End</h1>
 
-                <span>Any (straight forward) questions?</span>
+                <span>Any questions?</span>
+            </section>
+
+            <section style="text-align: left;">
+                <h1>Potential Future Topics</h1>
+
+                <ul>
+                    <li>Indexes</li>
+                    <li>Aggregation framework</li>
+                    <li>Schema Design</li>
+                    <li>Replica Sets</li>
+                    <li>Sharding</li>
+                </ul>
             </section>
 
         </div>
